@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "selector-class-pattern": "^[a-z]([-]?[a-z0-9]+)*(__[a-z0-9]([-]?[a-z0-9]+)*)?(--[a-z0-9]([-]?[a-z0-9]+)*)?$",
+    "scss/at-rule-no-unknown": true,
+    "scss/at-mixin-argumentless-call-parentheses": null,
+    "scss/at-extend-no-missing-placeholder": null
+  },
+  "defaultSeverity": "warning"
+}
