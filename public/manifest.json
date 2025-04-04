@@ -1,0 +1,42 @@
+{
+  "theme_color": "#e3d6f5",
+  "background_color": "#abf240",
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "icon512_maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "icon512_rounded.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "256x256",
+      "src": "icon256.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "192x192",
+      "src": "icon192.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "64x64",
+      "src": "icon64.png",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "any",
+  "display": "standalone",
+  "dir": "auto",
+  "lang": "ru-BY",
+  "name": "assistant_chef",
+  "short_name": "assistant_chef",
+  "start_url": "/",
+  "scope": "/",
+  "id": "id19071982"
+}
