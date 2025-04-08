@@ -1,6 +1,10 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import type {Metadata} from 'next';
+import {Inter, Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+});
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,8 +34,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="ru">
+      <body
+        className={`${inter.className} ${geistSans.variable} ${geistMono.variable}`}
+      >
         {children}
       </body>
     </html>
