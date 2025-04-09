@@ -20,7 +20,12 @@ const eslintConfig = [
     rules: {
       'prettier/prettier': [
         'error',
-        { singleQuote: true },
+        {
+          singleQuote: true,
+          indent: ['error', 2, { SwitchCase: 1 }],
+          'no-tabs': 'warning',
+        },
+
         {
           usePrettierrc: false,
         },

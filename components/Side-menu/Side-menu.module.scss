@@ -1,0 +1,10 @@
+.wrapper {
+  padding: 8px 12px;
+  background-color: var(--background);
+  border-right: 2px solid var(--color-border);
+  box-shadow: 2px 0px 6px rgba(25 25 25 /0.15);
+
+  @include mantine.dark {
+    box-shadow: 2px 0px 6px rgba(255 255 255 /0.35);
+  }
+}
