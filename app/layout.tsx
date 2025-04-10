@@ -1,5 +1,5 @@
-import type {Metadata, Viewport} from 'next';
-import {Inter, Geist} from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Inter, Geist } from 'next/font/google';
 
 // Import styles of packages that you've installed.
 // All packages except `@mantine/hooks` require styles imports
@@ -13,9 +13,9 @@ import {
   mantineHtmlProps,
 } from '@mantine/core';
 
-import {Header} from '@/components/Header';
-import {Footer} from '@/components/Footer/Footer';
-import {SideMenu} from '@/components/Side-menu';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer/Footer';
+import { SideMenu } from '@/components/Side-menu';
 
 import './globals.scss';
 

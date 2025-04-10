@@ -27,7 +27,7 @@ const eslintConfig = [
         },
 
         {
-          usePrettierrc: false,
+          // usePrettierrc: false,
         },
       ],
     },

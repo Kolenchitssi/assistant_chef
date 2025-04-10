@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 import styles from './Side-menu.module.scss';
 
@@ -16,6 +16,9 @@ export const SideMenu: FC = () => {
           </ol>
           <ol>
             <Link href="/about"> About</Link>
+          </ol>
+          <ol>
+            <Link href="/2"> Details</Link>
           </ol>
         </ul>
       </nav>

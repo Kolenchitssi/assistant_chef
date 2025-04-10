@@ -3,10 +3,10 @@
   justify-content: flex-start;
   align-items: center;
   padding: 0 32px;
-  background-color: rgba(188, 143, 143, 0.4);
+  background-color: hsl(0, 79%, 92%);
   min-height: 32px;
 
   @include mantine.dark {
-    background-color: rgb(71, 71, 71);
+    background-color: hsl(198, 58%, 14%);
   }
 }

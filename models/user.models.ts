@@ -8,6 +8,7 @@ export enum UserKeys {
   role = 'role',
   sex = 'sex',
   favorites = 'favorites',
+  myRecipe = 'myRecipe',
 }
 
 export interface IUser {
@@ -20,4 +21,5 @@ export interface IUser {
   [UserKeys.role]: 'user' | 'admin';
   [UserKeys.sex]: 'male' | 'female';
   [UserKeys.favorites]: string[];
+  [UserKeys.myRecipe]: string[];
 }

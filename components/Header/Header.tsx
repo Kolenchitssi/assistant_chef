@@ -1,6 +1,6 @@
 'use client';
 
-import {FC} from 'react';
+import { FC } from 'react';
 // import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -9,12 +9,12 @@ import {
   useComputedColorScheme,
   ActionIcon,
 } from '@mantine/core';
-import {IconSun, IconMoon} from '@tabler/icons-react';
+import { IconSun, IconMoon } from '@tabler/icons-react';
 import cx from 'clsx';
 import styles from './Header.module.scss';
 
 export const Header: FC = () => {
-  const {setColorScheme} = useMantineColorScheme();
+  const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme('light');
   const isLightScheme = computedColorScheme === 'light';
   return (
