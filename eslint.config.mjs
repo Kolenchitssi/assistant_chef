@@ -22,12 +22,13 @@ const eslintConfig = [
         'error',
         {
           singleQuote: true,
+          endOfLine: 'auto',
           indent: ['error', 2, { SwitchCase: 1 }],
           'no-tabs': 'warning',
         },
 
         {
-          // usePrettierrc: false,
+          // usePrettierrc: false, //
         },
       ],
     },
