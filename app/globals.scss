@@ -20,7 +20,7 @@ body {
   @include mantine.light {
     --background: #f8f8f8;
     --foreground: #171717;
-    --color-link: #080147;
+    --color-link: #250047;
     --color-border: #808080;
   }
 
@@ -47,8 +47,9 @@ body {
 a {
   color: var(--color-link);
   text-decoration: none;
+  font-weight: 500;
 
-  :hover {
+  &:hover {
     text-decoration: underline;
   }
 }
@@ -70,6 +71,14 @@ a {
   flex-grow: 1;
   display: grid;
   grid-template-columns: 200px 1fr;
+
+  main {
+    padding: 8px 8px 8px 16px;
+  }
+
+  .error {
+    color: red;
+  }
 }
 
 footer {

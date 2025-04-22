@@ -1,7 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-// import Link from 'next/link';
+import Link from 'next/link';
 import Image from 'next/image';
 import {
   // Button,
@@ -12,6 +12,7 @@ import {
 import { IconSun, IconMoon } from '@tabler/icons-react';
 import cx from 'clsx';
 import styles from './Header.module.scss';
+import { LogIn } from 'lucide-react';
 
 export const Header: FC = () => {
   const { setColorScheme } = useMantineColorScheme();
@@ -36,6 +37,9 @@ export const Header: FC = () => {
       <Button color="green" variant="filled">
         Button with props
       </Button> */}
+      <Link className={styles.login} href="/auth">
+        Login <LogIn />
+      </Link>
       <div className={styles.controls}>
         <ActionIcon
           onClick={() =>
@@ -46,13 +50,13 @@ export const Header: FC = () => {
           aria-label="Toggle color scheme"
         >
           {isLightScheme && (
-            <IconSun
+            <IconMoon
               className={cx(styles.icon, styles.light)}
               stroke={1.5}
             />
           )}
           {!isLightScheme && (
-            <IconMoon
+            <IconSun
               className={cx(styles.icon, styles.dark)}
               stroke={1.5}
             />

@@ -22,13 +22,17 @@
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@mantine/core": "^7.17.3",
+    "@mantine/form": "^7.17.4",
     "@mantine/hooks": "^7.17.3",
+    "@reduxjs/toolkit": "^2.6.1",
     "@tabler/icons-react": "^3.31.0",
     "clsx": "^2.1.1",
     "firebase": "^11.6.0",
+    "lucide-react": "^0.503.0",
     "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

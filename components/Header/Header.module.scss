@@ -1,6 +1,6 @@
 .header {
   display: grid;
-  grid-template-columns: 72px 1fr 48px;
+  grid-template-columns: 72px 1fr 82px 48px;
   align-items: center;
   gap: 24px;
   padding: 6px 12px 6px 32px;
@@ -35,13 +35,28 @@
 }
 
 .title {
+  color: var(--mantine-color-white);
+
   @include mantine.light {
-    text-shadow: 6px 6px 4px rgba(255, 72, 72, 0.5);
+    text-shadow: 6px 6px 4px rgba(80, 0, 0, 0.6);
   }
 
   @include mantine.dark {
     text-shadow: 6px 6px 4px rgba(72, 234, 255, 0.5);
   }
+}
+
+.login {
+  display: flex;
+  gap: 12px;
+  font-family:
+    Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1rem;
+  letter-spacing: normal;
+  color: light-dark(
+    var(--mantine-color-white),
+    var(--mantine-color-blue)
+  );
 }
 
 .icon {
