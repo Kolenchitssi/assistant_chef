@@ -1,21 +1,35 @@
-import { createSlice /*, PayloadAction */ } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User } from '@firebase/auth';
+// import { IUser } from '../recipe';
 
 export interface IUserReducer {
-  name: string;
-  email: string;
+  userData: User; // IUser;
   isFetching: boolean;
+  isAuth: boolean;
+  isUserLoading: boolean;
 }
 
 const initialState: IUserReducer = {
-  name: '',
-  email: '',
+  userData: {} as User,
   isFetching: false,
+  isAuth: false,
+  isUserLoading: false,
 };
 
 export const userSlice = createSlice({
-  name: 'accounts',
+  name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action: PayloadAction<User>) => {
+      state.userData = action.payload;
+    },
+    setIsAuth: (state, action: PayloadAction<boolean>) => {
+      state.isAuth = action.payload;
+    },
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isUserLoading = action.payload;
+    },
+  },
   selectors: {},
 });
 

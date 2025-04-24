@@ -13,11 +13,15 @@ import { IconSun, IconMoon } from '@tabler/icons-react';
 import cx from 'clsx';
 import styles from './Header.module.scss';
 import { LogIn } from 'lucide-react';
+import { useAppSelector } from '@/core/store/hooks';
 
 export const Header: FC = () => {
   const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme('light');
   const isLightScheme = computedColorScheme === 'light';
+  const userData = useAppSelector((state) => state.user.userData);
+  console.log('userData', userData);
+
   return (
     <header className={styles.header}>
       <div className={styles.logoWrapper}>
