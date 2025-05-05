@@ -2,6 +2,7 @@ export enum UserKeys {
   userID = 'userID',
   firstName = 'firstName',
   secondName = 'secondName',
+  photoURL = 'photoURL',
   email = 'email',
   phone = 'phone',
   nickName = 'nickName',
@@ -15,6 +16,7 @@ export interface IUser {
   [UserKeys.userID]: string;
   [UserKeys.firstName]: string;
   [UserKeys.secondName]: string;
+  [UserKeys.photoURL]: string;
   [UserKeys.email]: string;
   [UserKeys.phone]: string;
   [UserKeys.nickName]: string;

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-// import { Provider } from 'react-redux';
 import { Inter, Geist } from 'next/font/google';
 
 // Import styles of packages that you've installed.
@@ -17,10 +16,9 @@ import {
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer/Footer';
 import { SideMenu } from '@/components/Side-menu';
+import StoreProvider from '@/core/store/StoreProvider';
 
 import './globals.scss';
-// import { store } from '@/core/store/store';
-import StoreProvider from '@/core/store/StoreProvider';
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -78,7 +76,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // <Provider store={store}>
     <html lang="ru" {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript />
@@ -102,6 +99,5 @@ export default function RootLayout({
         </MantineProvider>
       </body>
     </html>
-    // </Provider>
   );
 }

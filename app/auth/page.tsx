@@ -1,6 +1,7 @@
 'use client';
 import { FC, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { signInWithEmailAndPassword, User } from '@firebase/auth';
 import { useDisclosure } from '@mantine/hooks';
@@ -12,9 +13,9 @@ import {
   Group,
 } from '@mantine/core';
 import { auth } from '@/utils/firebase';
+import { useAppAction } from '@/core/store/hooks';
 
 import styles from './page.module.scss';
-import { useAppAction } from '@/core/store/hooks';
 
 export interface ILoginData {
   email: string;
@@ -22,8 +23,11 @@ export interface ILoginData {
 }
 
 const Auth: FC = () => {
-  const [visible, { toggle }] = useDisclosure(false); // For password field
+  const router = useRouter();
   const { setUser, setIsAuth } = useAppAction();
+
+  // For password field
+  const [visible, { toggle }] = useDisclosure(false);
 
   const form = useForm<ILoginData>({
     mode: 'uncontrolled',
@@ -41,7 +45,7 @@ const Auth: FC = () => {
     },
   });
 
-  const { values } = form;
+  const values = form.getValues();
   console.log('values', values);
 
   const [errorMsg, setErrorMsg] = useState('');
@@ -61,11 +65,13 @@ const Auth: FC = () => {
       // Add to store  userData and isAuth
       setUser(currentUser);
       setIsAuth(true);
+      setErrorMsg('');
+      router.replace('/');
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMsg(err.message);
       } else {
-        setErrorMsg('Ошибка входа');
+        setErrorMsg('Login error');
       }
     }
 
@@ -74,6 +80,7 @@ const Auth: FC = () => {
 
   return (
     <div className={styles.auth}>
+      <h2 className={styles.title}>Login</h2>
       <form
         onSubmit={form.onSubmit((values) => {
           console.log(JSON.stringify(values, null, 2));
@@ -126,10 +133,7 @@ const Auth: FC = () => {
 
       <div className={styles.registration}>
         Don&apos;t have an account?
-        <Link
-          className={styles.registrationLink}
-          href="'registration"
-        >
+        <Link className={styles.registrationLink} href="registration">
           Registration.
         </Link>
       </div>

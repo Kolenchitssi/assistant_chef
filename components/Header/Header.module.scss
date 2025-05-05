@@ -46,8 +46,10 @@
   }
 }
 
-.login {
+.login,
+.logout {
   display: flex;
+  cursor: pointer;
   gap: 12px;
   font-family:
     Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -57,6 +59,10 @@
     var(--mantine-color-white),
     var(--mantine-color-blue)
   );
+
+  &:hover {
+    filter: opacity(0.85);
+  }
 }
 
 .icon {

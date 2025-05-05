@@ -3,14 +3,14 @@ import { User } from '@firebase/auth';
 // import { IUser } from '../recipe';
 
 export interface IUserReducer {
-  userData: User; // IUser;
+  userData: User | null; // IUser;
   isFetching: boolean;
   isAuth: boolean;
   isUserLoading: boolean;
 }
 
 const initialState: IUserReducer = {
-  userData: {} as User,
+  userData: null,
   isFetching: false,
   isAuth: false,
   isUserLoading: false,
@@ -20,7 +20,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User>) => {
+    setUser: (state, action: PayloadAction<User | null>) => {
       state.userData = action.payload;
     },
     setIsAuth: (state, action: PayloadAction<boolean>) => {

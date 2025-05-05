@@ -22,4 +22,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 // const analytics = getAnalytics(app); // may be need later
 
+// added this function for Header
+export const initializeFirebase = () => {
+  // const app =
+  initializeApp(firebaseConfig);
+  // getAuth(app);
+};
+
 export { auth };
