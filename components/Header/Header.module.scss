@@ -69,3 +69,16 @@
   width: 22px;
   height: 22px;
 }
+
+.loginButton {
+  position: relative;
+}
+
+.errMessage {
+  position: absolute;
+  top: 24px;
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  font-size: 12px;
+  letter-spacing: normal;
+  color: red;
+}

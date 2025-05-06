@@ -9,7 +9,7 @@ import {
   collection,
   getFirestore,
 } from '@firebase/firestore';
-// import { getDownloadURL } from '@firebase/storage';
+import { getDownloadURL } from '@firebase/storage';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -20,14 +20,18 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { useForm, isNotEmpty, isEmail } from '@mantine/form';
 import {
+  FileInput,
+  Input,
+  Image,
   TextInput,
   PasswordInput,
   Button,
   Group,
 } from '@mantine/core';
+import { useAppAction } from '@/core/store/hooks';
 
 import styles from './page.module.scss';
-import { useAppAction } from '@/core/store/hooks';
+import { writingImageToFirebase } from '@/utils/writingImageToFirebase/writingImageToFirebase';
 
 export interface IRegistrationData {
   email: string;
@@ -44,6 +48,7 @@ const Registration: FC = () => {
   // For password field
   const [visible1, { toggle: toggle1 }] = useDisclosure(false);
   const [visible2, { toggle: toggle2 }] = useDisclosure(false);
+  const [url, setUrl] = useState('');
 
   const form = useForm<IRegistrationData>({
     mode: 'uncontrolled',
@@ -71,6 +76,7 @@ const Registration: FC = () => {
     },
   });
 
+  const { setFieldValue } = form;
   const values = form.getValues();
   console.log('values', values);
 
@@ -129,6 +135,48 @@ const Registration: FC = () => {
           form.getInputNode(firstErrorPath)?.focus();
         })}
       >
+        <Image src={url} alt="logo" />
+        <Input
+          type="file"
+          accept=".jpg, .jpeg, .png"
+          // label="Input label"
+          // description="Select photo for avatar"
+          placeholder="Select photo"
+          // clearable
+          {...form.getInputProps('photoURL')}
+          onChange={async (e) => {
+            const files = e.target.files;
+            // const files = e ? e.target.files : e;
+            console.log('e', e, 'files', files);
+            if (files) {
+              // const imagesRefs = writingImageToFirebase(files[0]); // получаем ref  img файлa
+              // const urlImg1 = await getDownloadURL(imagesRefs); // получаем полный url картинки
+              // imagesPath = urlImg1.toString();
+              // setUserData({ ...userData, avatar: urlImg1 });
+            }
+          }}
+        />
+        <FileInput
+          accept=".jpg, .jpeg, .png"
+          // label="Input label"
+          // description="Select photo for avatar"
+          placeholder="Select photo"
+          // clearable
+          // {...form.getInputProps('photoURL')}
+          {...form.getInputProps('avatar')}
+          onChange={async (file) => {
+            if (file) {
+              const imagesRefs = writingImageToFirebase(file); // получаем ref  img файлa
+              const urlImg = await getDownloadURL(imagesRefs);
+              console.log('urlImg', urlImg); // получаем полный url картинки
+              // imagesPath = urlImg1.toString();
+              // setUserData({ ...userData, avatar: urlImg1 });
+              setFieldValue('photoURL', urlImg);
+              // setUrl(urlImg);
+              setUrl(file.name);
+            }
+          }}
+        />
         <TextInput
           mt="md"
           label="Email"

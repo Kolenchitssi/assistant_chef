@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { signInWithEmailAndPassword, User } from '@firebase/auth';
 import { useDisclosure } from '@mantine/hooks';
-import { useForm, isNotEmpty } from '@mantine/form';
+import { useForm, isNotEmpty, isEmail } from '@mantine/form';
 import {
   TextInput,
   PasswordInput,
@@ -36,7 +36,7 @@ const Auth: FC = () => {
       password: '',
     },
     validate: {
-      email: isNotEmpty('Field required'),
+      email: isEmail('Invalid email'),
       password: isNotEmpty('Field required'),
     },
     onValuesChange: (values) => {

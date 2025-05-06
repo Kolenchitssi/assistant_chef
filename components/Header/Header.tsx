@@ -64,7 +64,7 @@ export const Header: FC = () => {
         />
       </div>
       <h1 className={styles.title}>Assistant Chef</h1>
-      <div>
+      <div className={styles.loginButton}>
         {isAuth ? (
           <span className={styles.logout} onClick={handleLogout}>
             Logout <LogOut />
@@ -74,7 +74,9 @@ export const Header: FC = () => {
             Login <LogIn />
           </Link>
         )}
-        {errorMsg ? errorMsg : null}
+        <span className={styles.errMessage}>
+          {errorMsg ? errorMsg : null}
+        </span>
       </div>
       <div className={styles.controls}>
         <ActionIcon
