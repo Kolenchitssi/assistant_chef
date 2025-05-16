@@ -13,9 +13,9 @@ import {
   mantineHtmlProps,
 } from '@mantine/core';
 
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer/Footer';
-import { SideMenu } from '@/components/Side-menu';
+import { Header } from '@/components/layouts/header';
+import { Footer } from '@/components/layouts/footer/Footer';
+import { SideMenu } from '@/components/layouts/side-menu';
 import StoreProvider from '@/core/store/StoreProvider';
 
 import './globals.scss';

@@ -31,7 +31,7 @@ export const Header: FC = () => {
   console.log('userData', userData);
 
   const auth = getAuth();
-  const [errorMsg, setErrorMsg] = useState('test err');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleLogout = async () => {
     signOut(auth)

@@ -35,12 +35,13 @@ const Auth: FC = () => {
       email: '',
       password: '',
     },
+    validateInputOnChange: true,
     validate: {
       email: isEmail('Invalid email'),
       password: isNotEmpty('Field required'),
     },
     onValuesChange: (values) => {
-      form.validate();
+      // form.validate();
       console.log('onValuesChange', values);
     },
   });

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 type TProps = {
-  params: { recipeID: string };
+  params: Promise<{ recipeID: string }>;
 };
 
 async function getData(id: string) {
@@ -26,9 +26,13 @@ async function getData(id: string) {
   }
 }
 
-export async function generateMetadata({
-  params: { recipeID },
-}: TProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: TProps,
+): Promise<Metadata> {
+  const params = await props.params;
+
+  const { recipeID } = params;
+
   // можем динамически получить данные
   const data = await getData(recipeID);
   return {
@@ -36,9 +40,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function RecipeDetails({
-  params: { recipeID },
-}: TProps) {
+export default async function RecipeDetails(props: TProps) {
+  const params = await props.params;
+
+  const { recipeID } = params;
+
   const data = await getData(recipeID);
   return (
     <>
