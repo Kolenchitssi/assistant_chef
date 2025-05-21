@@ -1,4 +1,4 @@
-import RecipesTable from '@/components/blocks/recipes-table/recipes-table';
+import Recipes from '@/components/blocks/recipes/Recipes';
 import styles from './Home.module.scss';
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
         <h1>Home page</h1>
 
         <h2>To Do</h2>
-        <RecipesTable />
+        <Recipes />
       </main>
     </div>
   );

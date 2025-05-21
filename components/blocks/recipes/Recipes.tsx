@@ -3,8 +3,9 @@
 import { IRecipe } from '@/core/recipe';
 import { getDataArrayFromFirebase } from '@/utils/getDataArrayFromFirebase/getDataArrayFromFirebase';
 import { useState, useEffect } from 'react';
+import RecipesTable from './resipes-table/Recipes-table';
 
-function RecipesTable() {
+function Recipes() {
   const [recipes, setRecipes] = useState([] as IRecipe[]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
@@ -14,6 +15,7 @@ function RecipesTable() {
       setLoading(true);
       const recipes =
         await getDataArrayFromFirebase<IRecipe>('recipes');
+      console.log('recipes', recipes);
       setRecipes(recipes);
       setLoading(false);
     } catch (err: unknown) {
@@ -34,12 +36,15 @@ function RecipesTable() {
   if (errorMsg) return <div>Error: {errorMsg}</div>;
 
   return (
-    <ul>
-      {recipes.map((recipe, index) => (
-        <li key={index}>{recipe.recipeName}</li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {recipes.map((recipe, index) => (
+          <li key={index}>{recipe.Name}</li>
+        ))}
+      </ul>
+      <RecipesTable recipes={recipes} />
+    </>
   );
 }
 
-export default RecipesTable;
+export default Recipes;
