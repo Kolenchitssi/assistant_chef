@@ -1,6 +1,19 @@
-.table {
-  td {
-    padding: 2px;
-    border: 1px solid lightgray;
-  }
+.filters {
+  border-bottom-width: 2px;
+}
+
+.name {
+  min-width: 150px;
+}
+
+.description {
+  min-width: 50vw;
+}
+
+.mainIngredients {
+  min-width: 150px;
+}
+
+.ingredients {
+  min-width: 260px;
 }

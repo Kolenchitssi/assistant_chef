@@ -1,3 +1,14 @@
+export enum IngredientKeys {
+  name = 'name',
+  quantity = 'quantity',
+  unitOfMeasurement = 'unitOfMeasurement',
+}
+export interface IIngredient {
+  [IngredientKeys.name]: string;
+  [IngredientKeys.quantity]: number;
+  [IngredientKeys.unitOfMeasurement]: string;
+}
+
 export enum RecipeKeys {
   recipeID = 'recipeID',
   recipeName = 'Name',
@@ -6,18 +17,12 @@ export enum RecipeKeys {
   mainIngredient = 'mainIngredient',
 }
 
-export interface IIngredient {
-  name: string;
-  quantity: number;
-  unitOfMeasurement: string;
-}
-
 export interface IRecipe {
   [RecipeKeys.recipeID]: string;
   [RecipeKeys.recipeName]: string;
   [RecipeKeys.recipeDescription]: string;
   [RecipeKeys.ingredients]: IIngredient[];
-  [RecipeKeys.mainIngredient]: string;
+  [RecipeKeys.mainIngredient]: IIngredient;
 }
 
 export const DEFAULT_RECIPE = {

@@ -36,14 +36,9 @@ function Recipes() {
   if (errorMsg) return <div>Error: {errorMsg}</div>;
 
   return (
-    <>
-      <ul>
-        {recipes.map((recipe, index) => (
-          <li key={index}>{recipe.Name}</li>
-        ))}
-      </ul>
+    <div className="recipes">
       <RecipesTable recipes={recipes} />
-    </>
+    </div>
   );
 }
 
