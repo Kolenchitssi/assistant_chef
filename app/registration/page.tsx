@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from './page.module.scss';
-import Registration from '@/utils/upload-file/temp';
+import Registration from '@/components/pages/registartion';
 
 const RegistrationPage: FC = () => (
   <div className={styles.page}>

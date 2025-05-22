@@ -1,0 +1,21 @@
+.auth {
+  max-width: 500px;
+  margin: 42px auto;
+  border-radius: 8px;
+  padding: 12px 36px;
+  border: 2px solid gray;
+
+  .registration {
+    display: flex;
+    justify-content: center;
+  }
+
+  .registrationLink {
+    padding-left: 8px;
+    color: orange;
+  }
+}
+
+.title {
+  text-align: center;
+}

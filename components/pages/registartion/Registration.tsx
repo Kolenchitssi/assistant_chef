@@ -30,11 +30,11 @@ import {
 } from '@mantine/core';
 import { useAppAction } from '@/core/store/hooks';
 import user from '@/assets/images/user.svg';
-
-import styles from './page.module.scss';
-// import { writingImageToFirebase } from '@/utils/writingImageToFirebase/writingImageToFirebase';
 import { uploadFile } from '@/utils/upload-file/upload-file';
 
+// import { writingImageToFirebase } from '@/utils/writingImageToFirebase/writingImageToFirebase';
+
+import styles from './Registration.module.scss';
 export interface IRegistrationData {
   email: string;
   name: string;
