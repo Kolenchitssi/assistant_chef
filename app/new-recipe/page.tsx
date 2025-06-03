@@ -1,3 +1,9 @@
-export default function About() {
-  return <h2>Create New Recipe</h2>;
+import NewRecipe from '@/components/blocks/new-recipe/New-recipe';
+
+export default async function RecipeDetailsPage() {
+  return (
+    <div className="new-recipe">
+      <NewRecipe />
+    </div>
+  );
 }
