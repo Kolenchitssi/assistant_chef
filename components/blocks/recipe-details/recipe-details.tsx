@@ -67,6 +67,7 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({
             )}
           </div>
           <div className={styles.info}>
+            <h2>Description</h2>
             <p className={styles.description}>
               {recipe[RecipeKeys.recipeDescription]}
             </p>

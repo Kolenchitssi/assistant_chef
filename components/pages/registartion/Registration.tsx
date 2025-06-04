@@ -145,7 +145,7 @@ const Registration: FC = () => {
 
   const [urlImage, setUrlImage] = useState<string | null>('');
 
-  const handleFileInputChange = async (file: File | null) => {
+  const handleFileInputChange = /* async */ (file: File | null) => {
     setFile(file);
     if (file) {
       // const imagesRefs = writingImageToFirebase(file); // получаем ref  img файлa

@@ -19,6 +19,7 @@ import {
   NumberInput,
   Select,
 } from '@mantine/core';
+import Image from 'next/image';
 import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
 import { uploadFile } from '@/utils/upload-file/upload-file';
 
@@ -31,6 +32,7 @@ import {
 const NewRecipe: FC = () => {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
+  const [imgUrl, setImgUrl] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
   const form = useForm({
@@ -62,10 +64,19 @@ const NewRecipe: FC = () => {
     },
   });
 
+  const handleFileInputChange = (file: File | null) => {
+    setFile(file);
+    if (file) {
+      const fileLink = URL.createObjectURL(file);
+      setImgUrl(fileLink);
+    } else {
+      form.setFieldValue(RecipeKeys.imgUrl, '');
+    }
+  };
+
   const handleSubmit = async (values: typeof form.values) => {
     try {
       const imgUrl = file ? await uploadFile(file) : '';
-
       const recipe: IRecipe = {
         [RecipeKeys.recipeName]: values[RecipeKeys.recipeName],
         [RecipeKeys.recipeDescription]:
@@ -101,11 +112,21 @@ const NewRecipe: FC = () => {
     <div className={styles.recipe}>
       <h2>Create New Recipe</h2>
       <form onSubmit={form.onSubmit(handleSubmit)}>
+        {imgUrl && (
+          <div className={styles.photo}>
+            <Image
+              src={imgUrl}
+              alt="recipe photo"
+              width={480}
+              height={320}
+            />
+          </div>
+        )}
         <FileInput
           label="Recipe Image"
           accept="image/*"
           placeholder="Upload recipe image"
-          onChange={setFile}
+          onChange={handleFileInputChange}
           mb="md"
         />
 

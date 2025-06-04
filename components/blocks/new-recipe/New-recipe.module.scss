@@ -15,14 +15,29 @@
 }
 
 .header {
-  background-color: darkgray;
   font-size: 14px;
   font-weight: 500;
   padding: 6px 8px;
   padding-left: 12px;
+
+  @include mantine.light {
+    background-color: rgb(240, 128, 128, 0.3);
+  }
+
+  @include mantine.dark {
+    background-color: rgb(21, 61, 78, 0.3);
+  }
+}
+.photo {
+  text-align: center;
+  img {
+    object-fit: contain;
+  }
 }
 
 .ingredients {
+  margin-bottom: 12px;
+
   .row {
     padding: 6px 8px;
 

@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 import { Table, Select, TextInput, MultiSelect } from '@mantine/core';
 import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
 import {
@@ -124,7 +125,13 @@ const RecipesTable: React.FC<RecipesTableProps> = ({ recipes }) => {
             <Tbody>
               {filteredRecipes.map((recipe, index) => (
                 <Tr key={index}>
-                  <Td>{recipe.Name}</Td>
+                  <Td>
+                    <Link
+                      href={`recipe/${recipe[RecipeKeys.recipeID]}`}
+                    >
+                      {recipe.Name}
+                    </Link>
+                  </Td>
                   <Td>{recipe.description}</Td>
                   <Td>
                     <span>
