@@ -3,7 +3,7 @@ import { getUniqueValuesFromArrOfObj } from '@/utils/getUniqueValues/getUniqueVa
 
 // Получение уникальных ингредиентов для выпадающего списка
 export const getUniqueIngredients = (recipes: IRecipe[] = []) => {
-  console.log('recipes', recipes);
+  if (!recipes?.length) return [];
   const allIngredients = recipes.flatMap((recipe) =>
     recipe.ingredients.map((item) => item.name),
   );
@@ -11,6 +11,7 @@ export const getUniqueIngredients = (recipes: IRecipe[] = []) => {
 };
 
 export const getUniqueMainIngredients = (recipes: IRecipe[] = []) => {
+  if (!recipes?.length) return [];
   const allMainIngredients = recipes.map(
     (recipe) => recipe[RecipeKeys.mainIngredient],
   );

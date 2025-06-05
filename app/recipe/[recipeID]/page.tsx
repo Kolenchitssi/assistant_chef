@@ -1,4 +1,4 @@
-import RecipeDetails from '@/components/blocks/recipe-details/recipe-details';
+import RecipeDetails from '@/components/blocks/recipe-details';
 import styles from './page.module.scss';
 
 type TProps = {

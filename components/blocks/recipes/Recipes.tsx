@@ -32,11 +32,13 @@ function Recipes() {
     getListWithUrlsImg();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (errorMsg) return <div>Error: {errorMsg}</div>;
+  // if (loading) return <div>Loading...</div>;
+  // if (errorMsg) return <div>Error: {errorMsg}</div>;
 
   return (
     <div className="recipes">
+      {loading && <div>Loading...</div>}
+      {errorMsg && <div>Error: {errorMsg}</div>}
       <RecipesTable recipes={recipes} />
     </div>
   );

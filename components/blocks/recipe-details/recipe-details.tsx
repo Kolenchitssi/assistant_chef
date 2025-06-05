@@ -7,7 +7,7 @@ import { getDataByIdFromFirebase } from '@/utils/getDataFromFirebase/getDataFrom
 import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
 // import { useParams } from 'next/navigation';
 
-import styles from './recipe-details.module.scss';
+import styles from './Recipe-details.module.scss';
 
 interface RecipeDetailsProps {
   recipeID: string;
