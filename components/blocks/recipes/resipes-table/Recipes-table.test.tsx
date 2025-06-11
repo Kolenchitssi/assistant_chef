@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+
 import { IRecipe } from '@/core/recipe';
 import RecipesTable from './Recipes-table';
 
@@ -171,12 +173,57 @@ const mockRecipes: IRecipe[] = [
   },
 ];
 
+// describe для групировки тестов
 describe('RecipesTable', () => {
   it('renders table headers', () => {
     render(<RecipesTable recipes={mockRecipes} />);
+    //screen.debug(); // вывести весь DOM в конслоль для проверки
+
+    // поиск текста на странице
     expect(screen.getByText('Name')).toBeInTheDocument();
-    expect(screen.getByText('Description')).toBeInTheDocument();
     expect(screen.getByText('Main Ingredient')).toBeInTheDocument();
     expect(screen.getByText('Ingredients')).toBeInTheDocument();
+
+    // если есть несколько на странице
+    const descriptionElements = screen.getAllByText(/description/i); // Можно использовать регулярное выражение, здесь текст без учета регистра
+    expect(descriptionElements.length).toBeGreaterThan(0); // убедиться, что есть совпадающие элементы
+    // Или проверить конкретный элемент
+    expect(descriptionElements[0]).toBeInTheDocument();
+
+    // поиск элементов на странице
+    expect(screen.getByRole('link')).toBeInTheDocument();
+    expect(screen.getByRole('table')).toBeInTheDocument();
+
+    // если проверяем элемент которого может не быть
+    expect(screen.queryByRole('button')).toBeNull();
+  });
+
+  // test тоже самое что и it
+  test('render empty list', () => {
+    render(<RecipesTable recipes={[]} />);
+    expect(screen.getByText('Name')).toBeInTheDocument();
+  });
+
+  // Проверка если при  изменении чего-то у нас изменилась структура таблицы
+  test('table snapshot', () => {
+    const table = render(<RecipesTable recipes={mockRecipes} />);
+    expect(table).toMatchSnapshot();
+  });
+
+  // проверка действий  пользователя  ввод в поиск поля Name,
+  // нужно дождатся обновления после ввода поэтому функция асинхронная
+  test('Search Name is working', async () => {
+    render(<RecipesTable recipes={mockRecipes} />);
+
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByPlaceholderText('Filter by name'),
+      'myRecipe',
+    );
+
+    expect(screen.getByPlaceholderText('Filter by name')).toHaveValue(
+      'myRecipe',
+    );
   });
 });

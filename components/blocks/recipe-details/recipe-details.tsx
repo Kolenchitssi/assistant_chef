@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 
 import { getDataByIdFromFirebase } from '@/utils/getDataFromFirebase/getDataFromFirebase';
-import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
+import { IRecipe } from '@/core/recipe';
 // import { useParams } from 'next/navigation';
 
+import RecipeDetailsCard from './recipe-card';
 import styles from './Recipe-details.module.scss';
 
 interface RecipeDetailsProps {
@@ -35,11 +35,11 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({
         setRecipe(recipe);
         setLoading(false);
       } catch (err: unknown) {
+        setLoading(false);
         if (err instanceof Error) {
           setErrorMsg(err.message);
         } else {
           setErrorMsg('Error getting recipe');
-          setLoading(false);
         }
       }
     };
@@ -51,61 +51,7 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({
   return (
     <div className={styles.recipeDetails}>
       {recipe ? (
-        <>
-          <div className={styles.header}>
-            <h1 className={styles.title}>
-              {recipe[RecipeKeys.recipeName]}
-            </h1>
-            {recipe[RecipeKeys.imgUrl] && (
-              <Image
-                width={240}
-                height={280}
-                src={recipe[RecipeKeys.imgUrl]}
-                alt={recipe[RecipeKeys.recipeName]}
-                className={styles.recipeImage}
-              />
-            )}
-          </div>
-          <div className={styles.info}>
-            <h2>Description</h2>
-            <p className={styles.description}>
-              {recipe[RecipeKeys.recipeDescription]}
-            </p>
-            <div className={styles.metadata}>
-              <span>Servings: {'servings'}</span>
-              <span>Cooking Time: {'cookingTime'} minutes</span>
-            </div>
-          </div>
-          <div className={styles.ingredients}>
-            <h2>Main Ingredients</h2>
-            <span>
-              {recipe[RecipeKeys.mainIngredient][IngredientKeys.name]}
-              :
-              {
-                recipe[RecipeKeys.mainIngredient][
-                  IngredientKeys.quantity
-                ]
-              }
-              {
-                recipe[RecipeKeys.mainIngredient][
-                  IngredientKeys.unitOfMeasurement
-                ]
-              }
-            </span>
-          </div>
-          <div className={styles.ingredients}>
-            <h2>Ingredients</h2>
-            <ul>
-              {recipe[RecipeKeys.ingredients].map((ingredient) => (
-                <li key={ingredient[IngredientKeys.name]}>
-                  {ingredient[IngredientKeys.name]}:{' '}
-                  {ingredient[IngredientKeys.quantity]}
-                  {ingredient[IngredientKeys.unitOfMeasurement]}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </>
+        <RecipeDetailsCard recipe={recipe} />
       ) : (
         <span> Recipe not found</span>
       )}

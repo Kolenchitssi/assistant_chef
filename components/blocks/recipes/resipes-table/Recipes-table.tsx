@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import cx from 'clsx';
 import { Table, Select, TextInput, MultiSelect } from '@mantine/core';
 import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
 import {
@@ -63,66 +64,79 @@ const RecipesTable: React.FC<RecipesTableProps> = ({ recipes }) => {
 
   const { Thead, Tbody, Th, Tr, Td, ScrollContainer } = Table;
   return (
-    <div>
-      <ScrollContainer minWidth={500} type="native">
-        <Table striped highlightOnHover>
-          <Thead>
-            <Tr>
-              <Th className={styles.name}>Name</Th>
-              <Th className={styles.description}>Description</Th>
-              <Th className={styles.mainIngredients}>
-                Main Ingredient
-              </Th>
-              <Th className={styles.ingredients}>Ingredients</Th>
-            </Tr>
-            <Tr className={styles.filters}>
-              <Th>
-                <TextInput
-                  placeholder="Filter by name"
-                  value={nameFilter}
-                  onChange={(event) =>
-                    setNameFilter(event.currentTarget.value)
-                  }
-                  mb="xs"
-                />
-              </Th>
-              <Th>
-                <TextInput
-                  placeholder="Filter by description"
-                  value={descriptionFilter}
-                  onChange={(event) =>
-                    setDescriptionFilter(event.currentTarget.value)
-                  }
-                  mb="xs"
-                />
-              </Th>
-              <Th>
-                <Select
-                  placeholder="Filter by ingredients"
-                  data={mainIngredients}
-                  value={mainIngredientFilter}
-                  onChange={setMainIngredientFilter}
-                  clearable
-                  mb="xs"
-                />
-              </Th>
-              <Th>
-                <MultiSelect
-                  data={allIngredients}
-                  placeholder={
-                    !ingredientFilter.length
-                      ? 'Filter by ingredients'
-                      : ''
-                  }
-                  value={ingredientFilter}
-                  onChange={setIngredientFilter}
-                  mb="xs"
-                />
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {filteredRecipes.map((recipe, index) => (
+    <ScrollContainer minWidth={500} type="native">
+      <Table
+        striped
+        highlightOnHover
+        className={cx({
+          [styles.empty]: !filteredRecipes.length,
+          [styles.filled]: filteredRecipes.length,
+        })}
+
+        //2 вариант
+        // className={cx(
+        //   !filteredRecipes.length && styles.empty,
+        //   filteredRecipes.length && styles.filled,
+        // )}
+      >
+        <Thead>
+          <Tr>
+            <Th className={styles.name}>Name</Th>
+            <Th className={styles.description}>Description</Th>
+            <Th className={styles.mainIngredients}>
+              Main Ingredient
+            </Th>
+            <Th className={styles.ingredients}>Ingredients</Th>
+          </Tr>
+          <Tr className={styles.filters}>
+            <Th>
+              <TextInput
+                placeholder="Filter by name"
+                value={nameFilter}
+                onChange={(event) =>
+                  setNameFilter(event.currentTarget.value)
+                }
+                mb="xs"
+              />
+            </Th>
+            <Th>
+              <TextInput
+                placeholder="Filter by description"
+                value={descriptionFilter}
+                onChange={(event) =>
+                  setDescriptionFilter(event.currentTarget.value)
+                }
+                mb="xs"
+              />
+            </Th>
+            <Th>
+              <Select
+                placeholder="Filter by ingredients"
+                data={mainIngredients}
+                value={mainIngredientFilter}
+                onChange={setMainIngredientFilter}
+                clearable
+                mb="xs"
+              />
+            </Th>
+            <Th>
+              <MultiSelect
+                data={allIngredients}
+                placeholder={
+                  !ingredientFilter.length
+                    ? 'Filter by ingredients'
+                    : ''
+                }
+                value={ingredientFilter}
+                onChange={setIngredientFilter}
+                mb="xs"
+              />
+            </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {filteredRecipes.length ? (
+            filteredRecipes.map((recipe, index) => (
               <Tr key={index}>
                 <Td>
                   <Link
@@ -153,11 +167,24 @@ const RecipesTable: React.FC<RecipesTableProps> = ({ recipes }) => {
                   )}
                 </Td>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </ScrollContainer>
-    </div>
+            ))
+          ) : (
+            <Tr className={styles.screenPlaceholder}>
+              <Td
+                className={styles.screenPlaceholderCell}
+                colSpan={4}
+              >
+                <h4>
+                  No recipes were found matching the specified
+                  criteria.
+                </h4>
+                <h5> Please, change the selected filters</h5>
+              </Td>
+            </Tr>
+          )}
+        </Tbody>
+      </Table>
+    </ScrollContainer>
   );
 };
 

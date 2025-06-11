@@ -1,5 +1,5 @@
-import { render, screen } from '@/utils/test-utils';
 import '@testing-library/jest-dom';
+import { render, screen } from '@/utils/test-utils';
 import Home from './Home';
 
 // Mock the Recipes component since we don't want to test its implementation here

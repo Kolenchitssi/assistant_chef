@@ -17,3 +17,20 @@
 .ingredients {
   min-width: 260px;
 }
+
+.screenPlaceholder {
+  text-align: center;
+  border-bottom: 1px solid rgba(125, 125, 125, 0.2);
+
+  .screenPlaceholderCell {
+    padding: 24px 0;
+  }
+}
+
+.empty {
+  border-top: 1px dotted rgba(255, 0, 0, 0.5);
+}
+
+.filled {
+  border-top: 1px dotted rgba(0, 128, 0, 0.5);
+}
