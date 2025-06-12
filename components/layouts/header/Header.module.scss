@@ -4,6 +4,7 @@
   align-items: center;
   gap: 24px;
   padding: 6px 12px 6px 32px;
+  z-index: 2;
 
   // light-dark function is handled by PostCSS
   color: light-dark(
