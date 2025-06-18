@@ -1,0 +1,18 @@
+.recipe {
+  min-width: 640px;
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.row,
+.header {
+  display: grid;
+  column-gap: 12px;
+  grid-template-columns: minmax(240px, 4fr) minmax(
+      140px,
+      1fr
+    ) 120px 60px;
+}
+
+// ...rest of styles from New-recipe.module.scss...
