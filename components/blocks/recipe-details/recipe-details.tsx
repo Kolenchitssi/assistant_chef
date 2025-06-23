@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Group } from '@mantine/core';
 
-import { getDataByIdFromFirebase } from '@/utils/getDataFromFirebase/getDataFromFirebase';
+import { getDataByIdFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
 import { IRecipe } from '@/core/recipe';
 // import { useParams } from 'next/navigation';
 

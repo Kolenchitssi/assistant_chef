@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { doc, getFirestore, updateDoc } from '@firebase/firestore';
@@ -17,8 +18,12 @@ import {
   Select,
 } from '@mantine/core';
 
-import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
-import { getDataByIdFromFirebase } from '@/utils/getDataFromFirebase/getDataFromFirebase';
+import {
+  IngredientKeys,
+  type IRecipe,
+  RecipeKeys,
+} from '@/core/recipe';
+import { getDataByIdFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
 import { uploadFile } from '@/utils/upload-file/upload-file';
 import {
   INGREDIENT_INITIAL_VALUE,
@@ -103,7 +108,7 @@ const EditRecipe: FC<EditRecipeProps> = ({ recipeID }) => {
       }
     };
     fetchRecipe();
-  }, [recipeID, form]);
+  }, [recipeID]);
 
   const handleFileInputChange = (file: File | null) => {
     setFile(file);
@@ -275,7 +280,7 @@ const EditRecipe: FC<EditRecipeProps> = ({ recipeID }) => {
           </div>
         )}
 
-        <Group justify="flex-end">
+        <Group justify="flex-end" mt="lg">
           <Button
             variant="outline"
             onClick={() => router.push(`/recipe/${recipeID}`)}

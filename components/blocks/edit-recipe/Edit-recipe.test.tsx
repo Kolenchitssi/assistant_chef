@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import EditRecipe from './Edit-recipe';
-import { getDataByIdFromFirebase } from '@/utils/getDataFromFirebase/getDataFromFirebase';
+import { getDataByIdFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
 // import * as FireStoreFunctions from '@/utils/getDataFromFirebase/getDataFromFirebase';
 import { RecipeKeys } from '@/core/recipe';
 import { MantineProvider } from '@mantine/core';

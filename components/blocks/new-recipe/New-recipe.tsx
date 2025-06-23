@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   addDoc,
@@ -20,7 +20,11 @@ import {
   Select,
 } from '@mantine/core';
 import Image from 'next/image';
-import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
+import {
+  type IRecipe,
+  IngredientKeys,
+  RecipeKeys,
+} from '@/core/recipe';
 import { uploadFile } from '@/utils/upload-file/upload-file';
 
 import styles from './New-recipe.module.scss';

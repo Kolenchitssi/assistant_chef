@@ -9,10 +9,30 @@
 .header {
   display: grid;
   column-gap: 12px;
-  grid-template-columns: minmax(240px, 4fr) minmax(
-      140px,
-      1fr
-    ) 120px 60px;
+  grid-template-columns:
+    minmax(240px, 4fr) minmax(140px, 1fr)
+    120px 60px;
 }
 
-// ...rest of styles from New-recipe.module.scss...
+.row {
+  padding: 6px 8px;
+
+  &:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  &:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.deleteButton {
+  cursor: pointer;
+  align-self: center;
+  justify-self: center;
+  color: grey;
+
+  &:hover {
+    color: rgba(125, 125, 125, 0.5);
+  }
+}
