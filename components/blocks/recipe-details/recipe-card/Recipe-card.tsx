@@ -1,6 +1,10 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import Image from 'next/image';
-import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
+import {
+  type IRecipe,
+  IngredientKeys,
+  RecipeKeys,
+} from '@/core/recipe';
 
 import styles from './Recipe-card.module.scss';
 

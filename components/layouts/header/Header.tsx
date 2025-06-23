@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import cx from 'clsx';
 import { getAuth, signOut } from 'firebase/auth';
 import { LogIn, LogOut } from 'lucide-react';

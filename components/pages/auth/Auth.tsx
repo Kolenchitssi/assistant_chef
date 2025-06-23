@@ -1,9 +1,12 @@
 'use client';
-import { FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { signInWithEmailAndPassword, User } from '@firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  type User,
+} from '@firebase/auth';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm, isNotEmpty, isEmail } from '@mantine/form';
 import {

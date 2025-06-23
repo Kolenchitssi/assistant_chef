@@ -1,7 +1,7 @@
 import {
   configureStore,
-  ThunkAction,
-  Action,
+  type ThunkAction,
+  type Action,
 } from '@reduxjs/toolkit';
 // import commonReducer, {
 //   commonSliceActions,

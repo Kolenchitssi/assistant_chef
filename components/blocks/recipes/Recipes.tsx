@@ -1,6 +1,6 @@
 'use client';
 
-import { IRecipe } from '@/core/recipe';
+import type { IRecipe } from '@/core/recipe';
 import { getDataArrayFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
 import { useState, useEffect } from 'react';
 import RecipesTable from './resipes-table/Recipes-table';
