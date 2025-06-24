@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { type Metadata } from 'next';
 
 type TProps = {
   params: Promise<{ recipeID: string }>;

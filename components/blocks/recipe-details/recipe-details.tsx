@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button, Group } from '@mantine/core';
 
-import { getDataByIdFromFirebase } from '@/utils/getDataFromFirebase/getDataFromFirebase';
-import { IRecipe } from '@/core/recipe';
+import { getDataByIdFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
+import type { IRecipe } from '@/core/recipe';
 // import { useParams } from 'next/navigation';
 
 import RecipeDetailsCard from './recipe-card';
@@ -18,8 +20,9 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({
 }) => {
   // const params = useParams() as { [key: string]: string };
   // const { id } = params;
+  const router = useRouter();
 
-  const [recipe, setRecipe] = useState<IRecipe | null>();
+  const [recipe, setRecipe] = useState<IRecipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -53,8 +56,17 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({
       {recipe ? (
         <RecipeDetailsCard recipe={recipe} />
       ) : (
-        <span> Recipe not found</span>
+        <span>Recipe not found</span>
       )}
+
+      <Group justify="flex-end">
+        <Button
+          variant="outline"
+          onClick={() => router.push(`/edit-recipe/${recipeID}`)}
+        >
+          Edit
+        </Button>
+      </Group>
     </div>
   );
 };

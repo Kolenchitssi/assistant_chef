@@ -1,12 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import { type FC, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  addDoc,
-  collection,
-  getFirestore,
-} from '@firebase/firestore';
+import Image from 'next/image';
+import { doc, getFirestore, updateDoc } from '@firebase/firestore';
 import { Trash2 } from 'lucide-react';
 import { useForm, isNotEmpty } from '@mantine/form';
 import { randomId } from '@mantine/hooks';
@@ -19,25 +17,31 @@ import {
   NumberInput,
   Select,
 } from '@mantine/core';
-import Image from 'next/image';
+
 import {
-  type IRecipe,
   IngredientKeys,
+  type IRecipe,
   RecipeKeys,
 } from '@/core/recipe';
+import { getDataByIdFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
 import { uploadFile } from '@/utils/upload-file/upload-file';
-
-import styles from './New-recipe.module.scss';
 import {
   INGREDIENT_INITIAL_VALUE,
   UOM,
 } from '@/core/recipe/recipe.constants';
 
-const NewRecipe: FC = () => {
+import styles from './Edit-recipe.module.scss';
+
+interface EditRecipeProps {
+  recipeID: string;
+}
+
+const EditRecipe: FC<EditRecipeProps> = ({ recipeID }) => {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [imgUrl, setImgUrl] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const form = useForm({
     initialValues: {
@@ -68,39 +72,81 @@ const NewRecipe: FC = () => {
     },
   });
 
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      try {
+        const recipe = await getDataByIdFromFirebase<IRecipe>(
+          'recipes',
+          recipeID,
+        );
+        if (recipe) {
+          form.setValues({
+            [RecipeKeys.recipeName]: recipe[RecipeKeys.recipeName],
+            [RecipeKeys.recipeDescription]:
+              recipe[RecipeKeys.recipeDescription],
+            mainIngredientName:
+              recipe[RecipeKeys.mainIngredient][IngredientKeys.name],
+            mainIngredientQuantity:
+              recipe[RecipeKeys.mainIngredient][
+                IngredientKeys.quantity
+              ],
+            mainIngredientUnit:
+              recipe[RecipeKeys.mainIngredient][
+                IngredientKeys.unitOfMeasurement
+              ],
+            [RecipeKeys.ingredients]: recipe[RecipeKeys.ingredients],
+            [RecipeKeys.imgUrl]: recipe[RecipeKeys.imgUrl] || '',
+          });
+          setImgUrl(recipe[RecipeKeys.imgUrl] || '');
+        }
+        setLoading(false);
+      } catch (err) {
+        setErrorMsg(
+          err instanceof Error ? err.message : 'Error loading recipe',
+        );
+        setLoading(false);
+      }
+    };
+    fetchRecipe();
+  }, [recipeID]);
+
   const handleFileInputChange = (file: File | null) => {
     setFile(file);
     if (file) {
       const fileLink = URL.createObjectURL(file);
       setImgUrl(fileLink);
-    } else {
-      form.setFieldValue(RecipeKeys.imgUrl, '');
     }
   };
 
   const handleSubmit = async (values: typeof form.values) => {
     try {
-      const imgUrl = file ? await uploadFile(file) : '';
-      const recipe: IRecipe = {
+      const newImgUrl = file
+        ? await uploadFile(file)
+        : values[RecipeKeys.imgUrl];
+
+      // Create a plain object for Firebase update
+      const updateData = {
         [RecipeKeys.recipeName]: values[RecipeKeys.recipeName],
         [RecipeKeys.recipeDescription]:
           values[RecipeKeys.recipeDescription],
         [RecipeKeys.ingredients]: values[RecipeKeys.ingredients],
-        [RecipeKeys.mainIngredient]: {
-          key: randomId(),
-          name: values.mainIngredientName,
-          quantity: values.mainIngredientQuantity,
-          unitOfMeasurement: values.mainIngredientUnit,
-        },
-        [RecipeKeys.imgUrl]: imgUrl,
+        [`${RecipeKeys.mainIngredient}.${IngredientKeys.key}`]:
+          randomId(),
+        [`${RecipeKeys.mainIngredient}.${IngredientKeys.name}`]:
+          values.mainIngredientName,
+        [`${RecipeKeys.mainIngredient}.${IngredientKeys.quantity}`]:
+          values.mainIngredientQuantity,
+        [`${RecipeKeys.mainIngredient}.${IngredientKeys.unitOfMeasurement}`]:
+          values.mainIngredientUnit,
+        [RecipeKeys.imgUrl]: newImgUrl || null,
       };
 
       const db = getFirestore();
-      const docRef = await addDoc(collection(db, 'recipes'), recipe);
-      router.push(`/recipe/${docRef.id}`);
+      await updateDoc(doc(db, 'recipes', recipeID), updateData);
+      router.push(`/recipe/${recipeID}`);
     } catch (err) {
       setErrorMsg(
-        err instanceof Error ? err.message : 'Error creating recipe',
+        err instanceof Error ? err.message : 'Error updating recipe',
       );
     }
   };
@@ -112,9 +158,12 @@ const NewRecipe: FC = () => {
     });
   };
 
+  if (loading) return <div>Loading...</div>;
+  if (errorMsg) return <div>Error: {errorMsg}</div>;
+
   return (
     <div className={styles.recipe}>
-      <h2>Create New Recipe</h2>
+      <h2>Edit Recipe</h2>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         {imgUrl && (
           <div className={styles.photo}>
@@ -148,6 +197,7 @@ const NewRecipe: FC = () => {
           {...form.getInputProps(RecipeKeys.recipeDescription)}
           mb="md"
         />
+
         <div className={styles.row}>
           <TextInput
             label="Main Ingredient Name"
@@ -212,6 +262,7 @@ const NewRecipe: FC = () => {
 
                 <div
                   className={styles.deleteButton}
+                  data-testid="delete-ingredient"
                   onClick={() =>
                     form.removeListItem(RecipeKeys.ingredients, index)
                   }
@@ -229,9 +280,15 @@ const NewRecipe: FC = () => {
           </div>
         )}
 
-        <Group justify="flex-end">
+        <Group justify="flex-end" mt="lg">
+          <Button
+            variant="outline"
+            onClick={() => router.push(`/recipe/${recipeID}`)}
+          >
+            Cancel
+          </Button>
           <Button type="submit" color="blue">
-            Create Recipe
+            Save Changes
           </Button>
         </Group>
       </form>
@@ -239,4 +296,4 @@ const NewRecipe: FC = () => {
   );
 };
 
-export default NewRecipe;
+export default EditRecipe;

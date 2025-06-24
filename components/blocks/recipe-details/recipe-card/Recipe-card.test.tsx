@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { RecipeKeys } from '@/core/recipe';
 
-import RecipeDetailsCard from './recipe-card';
+import RecipeDetailsCard from './Recipe-card';
 
 // Мок данных рецепта
 const mockRecipe = {

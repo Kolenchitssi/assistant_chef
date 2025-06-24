@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RecipeDetails from './Recipe-details';
-import { getDataByIdFromFirebase } from '@/utils/getDataFromFirebase/getDataFromFirebase';
+import { getDataByIdFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
+import { MantineProvider } from '@mantine/core';
+import StoreProvider from '@/core/store/StoreProvider';
+
+// Mock the useRouter
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    prefetch: jest.fn(),
+    route: '/some-route',
+    asPath: '/some-route',
+  }),
+}));
+
+// Обертка с Mantine и Redux для рендера
+interface AllProvidersProps {
+  children: ReactNode;
+}
+
+const AllProviders: React.FC<AllProvidersProps> = ({ children }) => (
+  <MantineProvider>
+    <StoreProvider>{children} </StoreProvider>
+  </MantineProvider>
+);
 
 // Мок функции getDataByIdFromFirebase
 jest.mock('@/utils/getDataFromFirebase/getDataFromFirebase', () => ({
@@ -41,16 +64,24 @@ describe('RecipeDetails', () => {
   });
 
   it('renders "Recipe not found" when recipe is null', async () => {
-    // Симулируем успешную загрузку данных, но рецепт не найден
+    // Мокаем загрузку
     (getDataByIdFromFirebase as jest.Mock).mockResolvedValue(null);
 
-    render(<RecipeDetails recipeID="1" />);
+    render(<RecipeDetails recipeID="1" />, {
+      wrapper: AllProviders,
+    });
 
-    // Ожидаем появления сообщения "Recipe not found"
+    // Ждём исчезновения загрузочного текста
     await waitFor(() => {
       expect(
-        screen.getByText('Recipe not found'),
-      ).toBeInTheDocument();
+        screen.queryByText('Loading...'),
+      ).not.toBeInTheDocument();
+      // screen.debug(); //выводим на экран текущий DOM для отладки
     });
+
+    // Теперь ищем "Recipe not found"
+    expect(
+      await screen.findByText('Recipe not found'),
+    ).toBeInTheDocument();
   });
 });

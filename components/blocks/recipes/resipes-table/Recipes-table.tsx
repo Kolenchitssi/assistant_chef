@@ -3,7 +3,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import cx from 'clsx';
 import { Table, Select, TextInput, MultiSelect } from '@mantine/core';
-import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
+import {
+  type IRecipe,
+  IngredientKeys,
+  RecipeKeys,
+} from '@/core/recipe';
 import {
   getUniqueIngredients,
   getUniqueMainIngredients,

@@ -1,5 +1,9 @@
-import { IngredientKeys, IRecipe, RecipeKeys } from '@/core/recipe';
-import { getUniqueValuesFromArrOfObj } from '@/utils/getUniqueValues/getUniqueValues';
+import {
+  type IRecipe,
+  IngredientKeys,
+  RecipeKeys,
+} from '@/core/recipe';
+import { getUniqueValuesFromArrOfObj } from '@/utils/get-unique-values/get-unique-values';
 
 // Получение уникальных ингредиентов для выпадающего списка
 export const getUniqueIngredients = (recipes: IRecipe[] = []) => {

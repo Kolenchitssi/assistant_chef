@@ -7,6 +7,8 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true, //import type {myType} from'./types.ts
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,

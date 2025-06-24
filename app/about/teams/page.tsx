@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 async function getData() {
   // получение данных для статической страницы серверного компонента
