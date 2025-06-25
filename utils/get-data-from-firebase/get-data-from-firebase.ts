@@ -17,7 +17,7 @@ export const getDataArrayFromFirebase = async <T>(
   const arrData: T[] = [];
 
   querySnapshot.forEach((doc) => {
-    console.log('querySnapshot doc===', doc.data(), doc.id);
+    // console.log('querySnapshot doc===', doc.data(), doc.id);
     arrData.push({
       ...(doc.data() as T),
       [RecipeKeys.recipeID]: doc.id,
