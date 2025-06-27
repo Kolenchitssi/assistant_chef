@@ -4,6 +4,8 @@ import type { IRecipe } from '@/core/recipe';
 import { getDataArrayFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
 import { useState, useEffect } from 'react';
 import RecipesTable from './resipes-table/Recipes-table';
+import { Loader } from '@/components/ui/loader';
+import styles from './Recipes.module.scss';
 
 function Recipes() {
   const [recipes, setRecipes] = useState([] as IRecipe[]);
@@ -32,14 +34,17 @@ function Recipes() {
     getListWithUrlsImg();
   }, []);
 
-  // if (loading) return <div>Loading...</div>;
-  // if (errorMsg) return <div>Error: {errorMsg}</div>;
-
   return (
-    <div className="recipes">
+    <div className={styles.recipes}>
       {loading && <div>Loading...</div>}
       {errorMsg && <div>Error: {errorMsg}</div>}
-      <RecipesTable recipes={recipes} />
+      {!loading ? (
+        <RecipesTable recipes={recipes} />
+      ) : (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      )}
     </div>
   );
 }
