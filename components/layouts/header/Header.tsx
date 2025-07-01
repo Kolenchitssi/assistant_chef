@@ -41,7 +41,7 @@ export const Header: FC = () => {
         setIsAuth(false);
         setErrorMsg('');
         setUser(null);
-        // удаляем токен в cookies
+        // Удаляем токен в cookies
         destroyCookie(null, 'firebaseToken', { path: '/' });
       })
       .catch((err) => {
