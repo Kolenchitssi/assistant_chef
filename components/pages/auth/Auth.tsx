@@ -2,6 +2,7 @@
 import { type FC, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { setCookie } from 'nookies';
 
 import {
   signInWithEmailAndPassword,
@@ -65,6 +66,14 @@ const Auth: FC = () => {
 
       console.log('user', user, 'values', values);
       const currentUser: User = user.user;
+      const idToken = await user.user.getIdToken();
+
+      // сохраняем токен в cookies
+      setCookie(null, 'firebaseToken', idToken, {
+        maxAge: 60 * 60 * 24, // 1 день
+        path: '/',
+        sameSite: 'lax',
+      });
 
       // Add to store  userData and isAuth
       setUser(currentUser);

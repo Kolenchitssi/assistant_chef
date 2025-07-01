@@ -2,3 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npx lint-staged
+
+# запуск тестов только для изменённых файлов
+npm run test:changed

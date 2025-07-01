@@ -1,0 +1,9 @@
+.loader {
+  display: flex;
+  min-height: 200px;
+  justify-content: center;
+  align-items: center;
+  border: 2px dotted light-dark(lightcoral, rgb(21, 61, 78));
+  border-radius: 8px;
+  color: light-dark(lightcoral, rgb(21, 61, 78));
+}

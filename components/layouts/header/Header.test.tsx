@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import { MantineProvider } from '@mantine/core';
 import { Header } from './Header';
@@ -20,10 +20,10 @@ describe('Header', () => {
     render(<Header />, { wrapper: AllProviders });
     expect(screen.getByText('Assistant Chef')).toBeInTheDocument();
 
-    // Пример проверки: элемент с ролью 'banner' присутствует
+    // Пример проверки: элемент с ролью 'banner' присутствует.
     expect(screen.getByRole('banner')).toBeInTheDocument();
     // Проверка на наличие класса
-    expect(screen.getByRole('banner')).toHaveClass('header'); //руфвук имеет роль banner см. https://www.w3.org/TR/html-aria/#docconformance
+    expect(screen.getByRole('banner')).toHaveClass('header'); //header имеет роль banner см. https://www.w3.org/TR/html-aria/#docconformance
 
     //* Проверка на наличие у элемента header определенных стилей
 

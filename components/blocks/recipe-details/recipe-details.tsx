@@ -10,6 +10,7 @@ import type { IRecipe } from '@/core/recipe';
 
 import RecipeDetailsCard from './recipe-card';
 import styles from './Recipe-details.module.scss';
+import { Loader } from '@/components/ui/loader';
 
 interface RecipeDetailsProps {
   recipeID: string;
@@ -49,7 +50,12 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({
     getRecipe();
   }, [recipeID]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        Loading... <Loader />
+      </div>
+    );
   if (errorMsg) return <div>Error: {errorMsg}</div>;
   return (
     <div className={styles.recipeDetails}>

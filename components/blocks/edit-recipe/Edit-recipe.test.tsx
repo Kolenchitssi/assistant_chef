@@ -32,9 +32,12 @@ const AllProviders: React.FC<AllProvidersProps> = ({ children }) => (
 
 // Mock the Firebase functions
 //* jest.mock('@/utils/getDataFromFirebase/getDataFromFirebase');
-jest.mock('@/utils/getDataFromFirebase/getDataFromFirebase', () => ({
-  getDataByIdFromFirebase: jest.fn(),
-}));
+jest.mock(
+  '@/utils/get-data-from-firebase/get-data-from-firebase',
+  () => ({
+    getDataByIdFromFirebase: jest.fn(),
+  }),
+);
 
 jest.mock('@firebase/firestore', () => ({
   getFirestore: jest.fn(),

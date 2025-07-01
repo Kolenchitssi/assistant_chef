@@ -7,5 +7,5 @@ export const getDataArrayFromFirebase = async <T>() =>
 export const getDataByIdFromFirebase = async <T>() =>
   // collectionName: string,
   {
-    return [] as T[];
+    return {} as T;
   };

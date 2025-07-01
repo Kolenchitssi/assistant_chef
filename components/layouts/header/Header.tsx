@@ -6,6 +6,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import { LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { destroyCookie } from 'nookies';
 
 import {
   useMantineColorScheme,
@@ -14,9 +15,9 @@ import {
 } from '@mantine/core';
 import { IconSun, IconMoon } from '@tabler/icons-react';
 import { useAppSelector, useAppAction } from '@/core/store/hooks';
+import { initializeFirebase } from '@/utils/firebase/firebase';
 
 import styles from './Header.module.scss';
-import { initializeFirebase } from '@/utils/firebase/firebase';
 
 export const Header: FC = () => {
   initializeFirebase(); //* need to check why initialization in utils/firebase.ts is not enough
@@ -40,6 +41,8 @@ export const Header: FC = () => {
         setIsAuth(false);
         setErrorMsg('');
         setUser(null);
+        // Удаляем токен в cookies
+        destroyCookie(null, 'firebaseToken', { path: '/' });
       })
       .catch((err) => {
         // An error happened.

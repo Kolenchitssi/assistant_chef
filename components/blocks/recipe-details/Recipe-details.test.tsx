@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RecipeDetails from './Recipe-details';
@@ -28,9 +28,12 @@ const AllProviders: React.FC<AllProvidersProps> = ({ children }) => (
 );
 
 // Мок функции getDataByIdFromFirebase
-jest.mock('@/utils/getDataFromFirebase/getDataFromFirebase', () => ({
-  getDataByIdFromFirebase: jest.fn(),
-}));
+jest.mock(
+  '@/utils/get-data-from-firebase/get-data-from-firebase',
+  () => ({
+    getDataByIdFromFirebase: jest.fn(),
+  }),
+);
 
 describe('RecipeDetails', () => {
   beforeEach(() => {
