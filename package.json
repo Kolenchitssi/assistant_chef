@@ -14,7 +14,7 @@
     "*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "jest"
+      "jest --passWithNoTests"
     ],
     "*.{css, scss}": [
       "stylelint --fix",
