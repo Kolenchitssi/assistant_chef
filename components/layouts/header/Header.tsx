@@ -35,7 +35,7 @@ export const Header: FC = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleLogout = async () => {
-    // comment for run commit test1
+    // comment for run commit test 3
     signOut(auth)
       .then(() => {
         // Sign-out successful.
@@ -56,7 +56,7 @@ export const Header: FC = () => {
   };
 
   return (
-    <header className={styles.header2}>
+    <header className={styles.header}>
       <div className={styles.logoWrapper}>
         <Image
           className={styles.logo}

@@ -8,13 +8,13 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "test:changed": "scripts\\test-changed-files.bat"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
-      "prettier --write",
-      "jest --passWithNoTests"
+      "prettier --write"
     ],
     "*.{css, scss}": [
       "stylelint --fix",
