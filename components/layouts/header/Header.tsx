@@ -35,7 +35,7 @@ export const Header: FC = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleLogout = async () => {
-    // comment for run commit test
+    // comment for run commit test1
     signOut(auth)
       .then(() => {
         // Sign-out successful.

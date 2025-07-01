@@ -23,7 +23,7 @@ describe('Header', () => {
     // Пример проверки: элемент с ролью 'banner' присутствует
     expect(screen.getByRole('banner')).toBeInTheDocument();
     // Проверка на наличие класса
-    expect(screen.getByRole('banner')).toHaveClass('header'); //руфвук имеет роль banner см. https://www.w3.org/TR/html-aria/#docconformance
+    expect(screen.getByRole('banner')).toHaveClass('header'); //header имеет роль banner см. https://www.w3.org/TR/html-aria/#docconformance
 
     //* Проверка на наличие у элемента header определенных стилей
 
