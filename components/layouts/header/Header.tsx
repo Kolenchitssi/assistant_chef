@@ -56,7 +56,7 @@ export const Header: FC = () => {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header2}>
       <div className={styles.logoWrapper}>
         <Image
           className={styles.logo}
