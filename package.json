@@ -13,7 +13,8 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write",
+      "jest --findRelatedTests"
     ],
     "*.{css, scss}": [
       "stylelint --fix",
