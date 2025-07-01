@@ -17,7 +17,7 @@ function Recipes() {
       setLoading(true);
       const recipes =
         await getDataArrayFromFirebase<IRecipe>('recipes');
-      console.log('recipes:', recipes);
+      console.log('recipes: ', recipes);
       setRecipes(recipes);
       setLoading(false);
     } catch (err: unknown) {
