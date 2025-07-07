@@ -22,6 +22,7 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({
 }) => {
   // const params = useParams() as { [key: string]: string };
   // const { id } = params;
+
   const router = useRouter();
 
   const [recipe, setRecipe] = useState<IRecipe | null>(null);
