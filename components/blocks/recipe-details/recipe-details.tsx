@@ -9,8 +9,9 @@ import type { IRecipe } from '@/core/recipe';
 // import { useParams } from 'next/navigation';
 
 import RecipeDetailsCard from './recipe-card';
-import styles from './Recipe-details.module.scss';
 import { Loader } from '@/components/ui/loader';
+
+import styles from './Recipe-details.module.scss';
 
 interface RecipeDetailsProps {
   recipeID: string;
