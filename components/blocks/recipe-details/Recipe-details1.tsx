@@ -11,7 +11,7 @@ import type { IRecipe } from '@/core/recipe';
 import RecipeDetailsCard from './recipe-card';
 import { Loader } from '@/components/ui/loader';
 
-import styles from './Recipe-details.module.scss';
+import styles from './Recipe-details1.module.scss';
 
 interface RecipeDetailsProps {
   recipeID: string;
