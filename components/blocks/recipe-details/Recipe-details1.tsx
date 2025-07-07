@@ -9,8 +9,9 @@ import type { IRecipe } from '@/core/recipe';
 // import { useParams } from 'next/navigation';
 
 import RecipeDetailsCard from './recipe-card';
-import styles from './Recipe-details.module.scss';
 import { Loader } from '@/components/ui/loader';
+
+import styles from './Recipe-details1.module.scss';
 
 interface RecipeDetailsProps {
   recipeID: string;
@@ -21,6 +22,7 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({
 }) => {
   // const params = useParams() as { [key: string]: string };
   // const { id } = params;
+
   const router = useRouter();
 
   const [recipe, setRecipe] = useState<IRecipe | null>(null);

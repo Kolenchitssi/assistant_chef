@@ -16,7 +16,7 @@ for /f "usebackq tokens=*" %%f in (`git diff --cached --name-only`) do (
 
 if not "%test_files%"=="" (
     echo Запускаем тесты для: %test_files%
-    npx jest --findRelatedTests %test_files%
+    npx jest --findRelatedTests --passWithNoTests %test_files%
 ) else (
     echo Нет тестов для запуска.
 )

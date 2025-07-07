@@ -1,7 +1,7 @@
 import React, { type ReactNode } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import RecipeDetails from './Recipe-details';
+import RecipeDetails from './Recipe-details1';
 import { getDataByIdFromFirebase } from '@/utils/get-data-from-firebase/get-data-from-firebase';
 import { MantineProvider } from '@mantine/core';
 import StoreProvider from '@/core/store/StoreProvider';
